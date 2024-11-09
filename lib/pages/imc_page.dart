@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:imcappg10/models/imc_model.dart';
 
 class ImcPage extends StatefulWidget {
   @override
@@ -10,10 +11,32 @@ class _ImcPageState extends State<ImcPage> {
   double peso = 10;
   double altura = 0.5;
   double imcResult = 0;
+  ImcModel? selectedImcModel;
 
-  // double roundedOneDecimal(double number) {
-  //   return number.parse(value)
-  // }
+  void seleccionImcModel() {
+    if (imcResult > 0 && imcResult < 18.5) {
+      selectedImcModel = imcList[0];
+    } else if (imcResult >= 18.5 && imcResult <= 24.9) {
+      selectedImcModel = imcList[1];
+    } else if (imcResult >= 25 && imcResult <= 29.9) {
+      selectedImcModel = imcList[2];
+    } else {
+      selectedImcModel = imcList[3];
+    }
+  }
+
+  double roundedDecimal(double number) {
+    return double.parse(number.toStringAsFixed(2));
+  }
+
+  void calcularIMCvoid() {
+    imcResult = roundedDecimal((peso / (altura * altura)));
+    print(imcResult);
+  }
+
+  double calcularIMCdouble() {
+    return roundedDecimal((peso / (altura * altura)));
+  }
 
   Widget buildSliderIMC(String title, bool isAltura) {
     return Column(
@@ -48,22 +71,22 @@ class _ImcPageState extends State<ImcPage> {
     );
   }
 
-  Widget buildResultIMC() {
+  Widget buildResultIMCWidget(double valor, ImcModel imcModel) {
     return Column(
       children: [
         Text(
-          "20.1 ",
+          valor.toString(),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 35,
           ),
         ),
         Text(
-          "Normal",
+          imcModel.titulo,
           style: TextStyle(fontSize: 20),
         ),
         Text(
-          "Sigue tu actividad física, sigue comiendo saludable vvas por buen camino.",
+          imcModel.recomendacion,
           textAlign: TextAlign.center,
         ),
         Container(
@@ -120,7 +143,14 @@ class _ImcPageState extends State<ImcPage> {
                 width: MediaQuery.of(context).size.width,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // calcularIMCvoid();
+                    imcResult = calcularIMCdouble();
+                    seleccionImcModel();
+
+                    setState(() {});
+                    print(imcResult);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue, //Colors del fondo
                     foregroundColor: Colors.white, //Color del texto
@@ -137,7 +167,7 @@ class _ImcPageState extends State<ImcPage> {
               SizedBox(
                 height: 16,
               ),
-              buildResultIMC(),
+              buildResultIMCWidget(imcResult, selectedImcModel),
             ],
           ),
         ),
