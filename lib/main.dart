@@ -6,7 +6,7 @@ import 'package:imcappg10/pages/rich_text_page.dart';
 void main() {
   runApp(
     MaterialApp(
-      home: imcPage(),
+      home: ImcPage(),
       debugShowCheckedModeBanner: false,
     ),
   );

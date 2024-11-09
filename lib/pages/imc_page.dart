@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class imcPage extends StatefulWidget {
+class ImcPage extends StatefulWidget {
   @override
-  State<imcPage> createState() => _imcPageState();
+  State<ImcPage> createState() => _ImcPageState();
 }
 
-class _imcPageState extends State<imcPage> {
+class _ImcPageState extends State<ImcPage> {
   double peso = 10;
   double altura = 0.5;
   double imcResult = 0;
@@ -47,6 +47,44 @@ class _imcPageState extends State<imcPage> {
     );
   }
 
+  Widget buildResultIMC() {
+    return Column(
+      children: [
+        Text(
+          "20.1 ",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 35,
+          ),
+        ),
+        Text(
+          "Normal",
+          style: TextStyle(fontSize: 20),
+        ),
+        Text(
+          "Sigue tu actividad física, sigue comiendo saludable vvas por buen camino.",
+          textAlign: TextAlign.center,
+        ),
+        Container(
+          margin: EdgeInsets.all(16),
+          width: MediaQuery.of(context).size.width / 1.5,
+          height: 200,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: AssetImage("assets/images/normal.png"),
+            ),
+          ),
+        ),
+
+        // Image.asset(
+        //   "assets/images/normal.png",
+        //   width: MediaQuery.of(context).size.width / 1.5,
+        // ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -81,10 +119,15 @@ class _imcPageState extends State<imcPage> {
                     ), //Reducir redondez de los bordes
                     shadowColor: Colors.red, //color de la sombra
                     elevation: 3, //altura de la sombra
+                    // padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
                   ),
                   child: Text("Calcular"),
                 ),
-              )
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              buildResultIMC(),
             ],
           ),
         ),
