@@ -9,6 +9,7 @@ class _HomePageState extends State<HomePage> {
   double x = 0;
   double textSize = 10;
   bool? isChecked = true;
+  bool? isUnderline = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,8 +29,12 @@ class _HomePageState extends State<HomePage> {
                     fontSize: textSize,
                     // decoration: TextDecoration.overline, //linea arriba
                     // decoration: TextDecoration.underline, //linea abajo, subrayado
-                    decoration:
-                        TextDecoration.lineThrough, //línea al centro, tachado
+                    // decoration:
+                    // TextDecoration.lineThrough, //línea al centro, tachado
+
+                    decoration: isUnderline == true
+                        ? TextDecoration.underline
+                        : TextDecoration.none,
                   ),
                 ),
                 Divider(),
@@ -49,15 +54,16 @@ class _HomePageState extends State<HomePage> {
                 ),
                 CheckboxListTile(
                   title: Text("Is underline"),
-                  value: isChecked,
+                  value: isUnderline,
                   activeColor: Colors.orange,
                   checkColor: Colors.green,
                   secondary: Icon(Icons.star),
                   onChanged: (juanito) {
-                    isChecked = juanito;
+                    isUnderline = juanito;
                     setState(() {});
                   },
-                )
+                ),
+                Text("isUnderline: $isUnderline")
               ],
             ),
           ),
