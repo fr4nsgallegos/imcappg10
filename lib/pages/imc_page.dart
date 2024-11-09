@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ImcPage extends StatefulWidget {
   @override
@@ -71,8 +72,17 @@ class _ImcPageState extends State<ImcPage> {
           height: 200,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            image: DecorationImage(
-              image: AssetImage("assets/images/normal.png"),
+
+            // image: DecorationImage(
+            //   image: AssetImage("assets/images/normal.png"),
+            // ),
+          ),
+          child: SvgPicture.asset(
+            "assets/images/obesidad.svg",
+            // color: Colors.yellow,
+            colorFilter: ColorFilter.mode(
+              Colors.green,
+              BlendMode.color,
             ),
           ),
         ),
