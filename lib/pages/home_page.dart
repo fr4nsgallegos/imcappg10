@@ -6,10 +6,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  double x = 0;
   double textSize = 10;
-  bool? isChecked = true;
-  bool? isUnderline = false;
+  double red = 0, green = 0, blue = 0, opacity = 1.0;
+  bool isUnderline = false;
+  bool isOverline = false;
+  bool isLineThrough = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,31 +26,21 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Text(
-                  "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer",
+                  "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor desconocido usó una galería de textos y los mezcló de tal manera que logró hacer.",
                   style: TextStyle(
                     fontSize: textSize,
-                    // decoration: TextDecoration.overline, //linea arriba
-                    // decoration: TextDecoration.underline, //linea abajo, subrayado
-                    // decoration:
-                    // TextDecoration.lineThrough, //línea al centro, tachado
-
-                    // decoration: isUnderline == true
-                    //     ? TextDecoration.underline
-                    //     : TextDecoration.none,
-
-                    decoration: TextDecoration.combine(
-                      [
-                        TextDecoration.lineThrough,
-                        TextDecoration.underline,
-                        TextDecoration.overline,
-                      ],
-                    ),
-                    fontWeight: FontWeight.w500, //grosor del texto
-                    color: Color.fromRGBO(255, 0, 255, 1),
+                    color: Color.fromRGBO(
+                        red.toInt(), green.toInt(), blue.toInt(), opacity),
+                    decoration: TextDecoration.combine([
+                      if (isUnderline) TextDecoration.underline,
+                      if (isOverline) TextDecoration.overline,
+                      if (isLineThrough) TextDecoration.lineThrough,
+                    ]),
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 Divider(),
-                Text("Tamaño del texto Slide"),
+                Text("Tamaño del texto"),
                 Slider(
                   max: 30,
                   min: 5,
@@ -56,25 +48,89 @@ class _HomePageState extends State<HomePage> {
                   activeColor: Colors.red,
                   inactiveColor: Colors.green,
                   thumbColor: Colors.yellow,
-                  onChanged: (double mandarina) {
-                    textSize = mandarina;
-                    print(mandarina);
-                    setState(() {});
+                  onChanged: (double newSize) {
+                    setState(() {
+                      textSize = newSize;
+                    });
+                  },
+                ),
+                Divider(),
+                Text("Rojo"),
+                Slider(
+                  max: 255,
+                  min: 0,
+                  value: red,
+                  activeColor: Colors.red,
+                  onChanged: (double value) {
+                    setState(() {
+                      red = value;
+                    });
+                  },
+                ),
+                Text("Verde"),
+                Slider(
+                  max: 255,
+                  min: 0,
+                  value: green,
+                  activeColor: Colors.green,
+                  onChanged: (double value) {
+                    setState(() {
+                      green = value;
+                    });
+                  },
+                ),
+                Text("Azul"),
+                Slider(
+                  max: 255,
+                  min: 0,
+                  value: blue,
+                  activeColor: Colors.blue,
+                  onChanged: (double value) {
+                    setState(() {
+                      blue = value;
+                    });
+                  },
+                ),
+                Text("Opacidad del texto"),
+                Slider(
+                  max: 1,
+                  min: 0,
+                  value: opacity,
+                  activeColor: Colors.grey,
+                  onChanged: (double value) {
+                    setState(() {
+                      opacity = value;
+                    });
+                  },
+                ),
+                Divider(),
+                CheckboxListTile(
+                  title: Text("Subrayado"),
+                  value: isUnderline,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isUnderline = value ?? false;
+                    });
                   },
                 ),
                 CheckboxListTile(
-                  title: Text("Is underline"),
-                  value: isUnderline,
-                  activeColor: Colors.orange,
-                  checkColor: Colors.green,
-                  secondary: Icon(Icons.star),
-                  onChanged: (juanito) {
-                    isUnderline = juanito;
-                    print(isUnderline);
-                    setState(() {});
+                  title: Text("Línea arriba"),
+                  value: isOverline,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isOverline = value ?? false;
+                    });
                   },
                 ),
-                Text("isUnderline: $isUnderline")
+                CheckboxListTile(
+                  title: Text("Tachado"),
+                  value: isLineThrough,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isLineThrough = value ?? false;
+                    });
+                  },
+                ),
               ],
             ),
           ),
