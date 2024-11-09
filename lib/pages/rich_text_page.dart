@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RichTextPage extends StatelessWidget {
+  bool isImportant = true;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -75,6 +76,25 @@ class RichTextPage extends StatelessWidget {
                     TextSpan(
                       text: " Más texto",
                       style: TextStyle(color: Colors.black, fontSize: 18),
+                    ),
+                  ],
+                ),
+              ),
+
+              //CON CONDICIONALES
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(color: Colors.black),
+                  children: [
+                    TextSpan(text: "Este es un texto "),
+                    TextSpan(
+                      text: isImportant ? "IMPORTANTE" : "normal",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight:
+                            isImportant ? FontWeight.bold : FontWeight.normal,
+                        color: isImportant ? Colors.red : Colors.orange,
+                      ),
                     ),
                   ],
                 ),
