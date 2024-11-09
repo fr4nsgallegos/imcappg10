@@ -83,7 +83,8 @@ class _ImcPageState extends State<ImcPage> {
         ),
         Text(
           imcModel.titulo,
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: imcModel.color),
         ),
         Text(
           imcModel.recomendacion,
@@ -91,7 +92,7 @@ class _ImcPageState extends State<ImcPage> {
         ),
         Container(
           margin: EdgeInsets.all(16),
-          width: MediaQuery.of(context).size.width / 1.5,
+          width: 200,
           height: 200,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -100,12 +101,15 @@ class _ImcPageState extends State<ImcPage> {
             //   image: AssetImage("assets/images/normal.png"),
             // ),
           ),
-          child: SvgPicture.asset(
-            "assets/images/obesidad.svg",
-            // color: Colors.yellow,
-            colorFilter: ColorFilter.mode(
-              Colors.green,
-              BlendMode.color,
+          child: ClipOval(
+            child: SvgPicture.asset(
+              imcModel.pathImage,
+              // color: Colors.yellow,
+              colorFilter: ColorFilter.mode(
+                imcModel.color,
+                BlendMode.color,
+              ),
+              fit: BoxFit.contain,
             ),
           ),
         ),
