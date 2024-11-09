@@ -167,7 +167,9 @@ class _ImcPageState extends State<ImcPage> {
               SizedBox(
                 height: 16,
               ),
-              buildResultIMCWidget(imcResult, selectedImcModel),
+              selectedImcModel == null
+                  ? Text("Realiza el calculo para ver el resultado")
+                  : buildResultIMCWidget(imcResult, selectedImcModel!),
             ],
           ),
         ),
