@@ -32,9 +32,17 @@ class _HomePageState extends State<HomePage> {
                     // decoration:
                     // TextDecoration.lineThrough, //línea al centro, tachado
 
-                    decoration: isUnderline == true
-                        ? TextDecoration.underline
-                        : TextDecoration.none,
+                    // decoration: isUnderline == true
+                    //     ? TextDecoration.underline
+                    //     : TextDecoration.none,
+
+                    decoration: TextDecoration.combine(
+                      [
+                        TextDecoration.lineThrough,
+                        TextDecoration.underline,
+                        TextDecoration.overline,
+                      ],
+                    ),
                   ),
                 ),
                 Divider(),
@@ -60,6 +68,7 @@ class _HomePageState extends State<HomePage> {
                   secondary: Icon(Icons.star),
                   onChanged: (juanito) {
                     isUnderline = juanito;
+                    print(isUnderline);
                     setState(() {});
                   },
                 ),
