@@ -43,6 +43,8 @@ class _HomePageState extends State<HomePage> {
                         TextDecoration.overline,
                       ],
                     ),
+                    fontWeight: FontWeight.w500, //grosor del texto
+                    color: Color.fromRGBO(255, 0, 255, 1),
                   ),
                 ),
                 Divider(),
