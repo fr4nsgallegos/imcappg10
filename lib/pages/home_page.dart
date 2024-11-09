@@ -24,7 +24,13 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer",
-                  style: TextStyle(fontSize: textSize),
+                  style: TextStyle(
+                    fontSize: textSize,
+                    // decoration: TextDecoration.overline, //linea arriba
+                    // decoration: TextDecoration.underline, //linea abajo, subrayado
+                    decoration:
+                        TextDecoration.lineThrough, //línea al centro, tachado
+                  ),
                 ),
                 Divider(),
                 Text("Tamaño del texto Slide"),
@@ -42,8 +48,11 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 CheckboxListTile(
-                  title: Text("Is checked"),
+                  title: Text("Is underline"),
                   value: isChecked,
+                  activeColor: Colors.orange,
+                  checkColor: Colors.green,
+                  secondary: Icon(Icons.star),
                   onChanged: (juanito) {
                     isChecked = juanito;
                     setState(() {});
